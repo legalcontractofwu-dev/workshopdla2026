@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>กำหนดการ WORKSHOP การปรับเปลี่ยนโครงสร้างหน่วยงาน "ส่วนนิติการ"</title>
+    <title>กำหนดการ WORKSHOP การปรับเปลี่ยนโครงสร้างหน่วยงาน</title>
     <!-- ใช้ Tailwind CSS สำหรับจัดการ Layout และ สี -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- ใช้ Font Kanit สำหรับภาษาไทย -->
@@ -104,8 +104,8 @@
             <!-- ส่วนกล่องวิทยากร (ขวาบน) -->
             <div class="absolute right-6 top-2 z-20 w-[250px] bg-white border border-gray-200 rounded-xl shadow-xl text-center p-4">
                 <div class="w-24 h-24 mx-auto bg-orange-100 rounded-full border-4 border-white shadow-md overflow-hidden mb-2 flex items-center justify-center">
-                    <!-- เพิ่ม https://corsproxy.io/? ไว้หน้า URL เพื่อแก้ปัญหาไม่แสดงรูปตอน Export -->
-                    <img src="nopporn.png" crossorigin="anonymous" alt="ผศ.ดร.นพพร ธรรมรงค์รัตน์" class="w-full h-full object-cover object-top">
+                    <!-- ดึงรูปภาพจากไฟล์ใน GitHub (โฟลเดอร์เดียวกัน) -->
+                    <img src="nopporn.png" alt="ผศ.ดร.นพพร ธรรมรงค์รัตน์" class="w-full h-full object-cover object-top">
                 </div>
                 <p class="font-bold text-red-600 text-sm mb-1 bg-red-100 rounded-full inline-block px-3 py-1 mt-1">วิทยากรกระบวนการ</p>
                 <p class="font-bold text-[#1b365d] text-sm mt-1">ผศ.ดร.นพพร ธรรมรงค์รัตน์</p>
@@ -342,7 +342,7 @@
                 // รอภาพโหลดให้เสร็จก่อนสร้าง Canvas
                 const canvas = await html2canvas(element, {
                     scale: 2.5, // เพิ่มความละเอียด (High Resolution)
-                    useCORS: true, // อนุญาตให้ดึงรูปภาพจากโดเมนอื่นมาวาดลง Canvas ได้ (สำคัญสำหรับรูปวิทยากร)
+                    useCORS: true, // อนุญาตให้ดึงรูปภาพจากโดเมนอื่นมาวาดลง Canvas ได้
                     backgroundColor: '#ffffff',
                     logging: false
                 });

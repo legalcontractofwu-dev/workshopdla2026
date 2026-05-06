@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>โครงการจัดทำ Work shop "Focus Group: WU Legal Change for Growth" ส่วนนิติการ มหาวิทยาลัยวลัยลักษณ์</title>
-    <!-- ใช้ Tailwind CSS สำหรับจัดการ Layout และ สี -->
+    <title>โครงการจัดทำ Workshop "Focus Group: WU Legal Change for Growth" ส่วนนิติการ มหาวิทยาลัยวลัยลักษณ์</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- ใช้ Font Kanit สำหรับภาษาไทย -->
+    <!-- Google Font: Kanit -->
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- ใช้ FontAwesome สำหรับ Icon ต่างๆ -->
+    <!-- FontAwesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- เพิ่มไลบรารีสำหรับสร้าง PDF -->
+    <!-- PDF & Canvas Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
@@ -21,10 +21,10 @@
             background-color: #f0f4f8;
         }
         
-        /* CSS สำหรับวาดรูปทรงลูกศร (Chevron) ในไทม์ไลน์ */
+        /* Shape for Timeline Chevrons */
         .chevron {
             clip-path: polygon(0% 0%, 92% 0%, 100% 50%, 92% 100%, 0% 100%, 8% 50%);
-            margin-left: -15px; /* ทำให้ลูกศรซ้อนกันพอดี */
+            margin-left: -15px; 
         }
         .chevron-first {
             clip-path: polygon(0% 0%, 92% 0%, 100% 50%, 92% 100%, 0% 100%);
@@ -35,54 +35,53 @@
             margin-left: -15px;
         }
 
-        /* เงาเพิ่มเติมเพื่อความสวยงาม */
+        /* Shadow Utility */
         .card-shadow {
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        /* Disable horizontal scroll on small screens for the capture area to ensure full width capture */
+        #infographic-container {
+            min-width: 1300px;
         }
     </style>
 </head>
 <body class="p-4 md:p-8">
 
-    <!-- กลุ่มปุ่ม Export (Fixed อยู่มุมขวาล่าง) -->
+    <!-- Export Buttons -->
     <div class="fixed bottom-6 right-6 z-50 flex gap-4">
-        <button id="exportPngBtn" onclick="exportPNG()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full shadow-[0_10px_25px_-5px_rgba(37,99,235,0.5)] flex items-center gap-2 transition transform hover:-translate-y-1">
+        <button id="exportPngBtn" onclick="exportPNG()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full shadow-lg flex items-center gap-2 transition transform hover:-translate-y-1">
             <i class="fas fa-file-image text-xl"></i> <span>ดาวน์โหลด PNG</span>
         </button>
-        <button id="exportPdfBtn" onclick="exportPDF()" class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-full shadow-[0_10px_25px_-5px_rgba(220,38,38,0.5)] flex items-center gap-2 transition transform hover:-translate-y-1">
+        <button id="exportPdfBtn" onclick="exportPDF()" class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-full shadow-lg flex items-center gap-2 transition transform hover:-translate-y-1">
             <i class="fas fa-file-pdf text-xl"></i> <span>ดาวน์โหลด PDF</span>
         </button>
     </div>
 
-    <!-- Container หลัก (เพิ่ม ID infographic-container เพื่อใช้เป็นเป้าหมายในการ Capture) -->
-    <div id="infographic-container" class="max-w-[1400px] mx-auto bg-white rounded-2xl shadow-2xl overflow-hidden min-w-[1200px] overflow-x-auto relative">
+    <!-- Main Content Container -->
+    <div id="infographic-container" class="max-w-[1450px] mx-auto bg-white rounded-2xl shadow-2xl overflow-hidden relative">
         
-        <!-- ==========================================
-             LAYER 1: ส่วนหัว (Header) & วันที่/สถานที่
-        =========================================== -->
+        <!-- HEADER LAYER -->
         <div class="bg-[#1b365d] text-white p-8 flex justify-between items-center relative overflow-hidden">
-            <!-- ลวดลาย Background ด้านหลัง (Icon จางๆ) -->
             <div class="absolute right-1/3 top-0 opacity-10 text-8xl flex gap-8">
                 <i class="fas fa-project-diagram mt-4"></i>
                 <i class="fas fa-lightbulb -mt-4"></i>
                 <i class="fas fa-cogs mt-8"></i>
             </div>
 
-            <!-- ข้อความส่วนหัว -->
             <div class="z-10 relative">
-                <h1 class="text-5xl font-bold mb-2 tracking-wide text-white">โครงการจัดทำ Work shop<span class="text-[#facc15]">"Focus Group: WU Legal Change for Growth"
-</span></h1>
+                <h1 class="text-5xl font-bold mb-2 tracking-wide text-white">โครงการจัดทำ Workshop <br><span class="text-[#facc15]">"Focus Group: WU Legal Change for Growth"</span></h1>
                 <h2 class="text-4xl font-semibold text-white">ส่วนนิติการ มหาวิทยาลัยวลัยลักษณ์</h2>
             </div>
 
-            <!-- กล่องวันที่และสถานที่ -->
-            <div class="z-10 bg-[#e0f2fe] text-[#1e3a8a] p-4 rounded-xl shadow-lg border-l-8 border-[#3b82f6] w-[450px]">
+            <div class="z-10 bg-[#e0f2fe] text-[#1e3a8a] p-5 rounded-xl shadow-lg border-l-8 border-[#3b82f6] w-[450px]">
                 <div class="flex items-center gap-4 mb-3">
                     <div class="bg-white p-3 rounded-full shadow text-2xl text-red-500">
                         <i class="far fa-calendar-alt"></i>
                     </div>
                     <div>
-                        <p class="text-lg font-bold">วันที่ 12 พฤษภาคม 2569</p>
-                        <p class="text-md font-medium text-gray-700">เวลา 08.30-16.30 น.</p>
+                        <p class="text-xl font-bold">วันที่ 12 พฤษภาคม 2569</p>
+                        <p class="text-md font-medium text-gray-700">เวลา 08.30 - 16.30 น.</p>
                     </div>
                 </div>
                 <div class="flex items-center gap-4">
@@ -90,34 +89,29 @@
                         <i class="fas fa-building"></i>
                     </div>
                     <div>
-                        <p class="text-lg font-bold">ณ ห้องประชุม 4 อาคารอุทยาน</p>
+                        <p class="text-xl font-bold">ณ ห้องประชุม 4 อาคารอุทยาน</p>
                         <p class="text-md font-medium text-gray-700">วิทยาศาสตร์และเทคโนโลยี</p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- ==========================================
-             LAYER 2: ไทม์ไลน์แนวนอน (Top Timeline)
-        =========================================== -->
+        <!-- TIMELINE LAYER -->
         <div class="p-6 relative">
-            
-            <!-- ส่วนกล่องวิทยากร (ขวาบน) -->
-            <div class="absolute right-6 top-2 z-20 w-[250px] bg-white border border-gray-200 rounded-xl shadow-xl text-center p-4">
+            <!-- Facilitator Box -->
+            <div class="absolute right-6 top-2 z-20 w-[260px] bg-white border border-gray-200 rounded-xl shadow-xl text-center p-4">
                 <div class="w-24 h-24 mx-auto bg-orange-100 rounded-full border-4 border-white shadow-md overflow-hidden mb-2 flex items-center justify-center">
-                    <!-- ดึงรูปภาพจากไฟล์ใน GitHub (โฟลเดอร์เดียวกัน) -->
-                    <img src="nopporn.png" alt="ผศ.ดร.นพพร ธรรมรงค์รัตน์" class="w-full h-full object-cover object-top">
+                    <img src="nopporn.png" alt="Facilitator" onerror="this.src='https://ui-avatars.com/api/?name=Nopporn&background=fdf2f8&color=be185d'" class="w-full h-full object-cover object-top">
                 </div>
                 <p class="font-bold text-red-600 text-sm mb-1 bg-red-100 rounded-full inline-block px-3 py-1 mt-1">วิทยากรกระบวนการ</p>
                 <p class="font-bold text-[#1b365d] text-sm mt-1">ผศ.ดร.นพพร ธรรมรงค์รัตน์</p>
-                <p class="text-[11px] text-gray-600 leading-tight mt-1">(ผู้ช่วยอธิการบดี<br>ฝ่ายทรัพยากรมนุษย์และองค์กร)</p>
+                <p class="text-[11px] text-gray-600 leading-tight mt-1">(ผู้ช่วยอธิการบดีฝ่ายทรัพยากรมนุษย์และองค์กร)</p>
             </div>
 
-            <!-- กล่องช่วงเช้า -->
-            <div class="mb-2 mr-[260px]">
-                <h3 class="font-bold text-xl text-[#1b365d] mb-2 border-b-2 border-gray-300 inline-block pb-1"><i class="fas fa-sun text-orange-400 mr-2"></i>ช่วงเช้า</h3>
-                <div class="flex w-full text-white text-center font-medium text-sm min-h-[90px]">
-                    
+            <!-- Morning Timeline -->
+            <div class="mb-4 mr-[280px]">
+                <h3 class="font-bold text-xl text-[#1b365d] mb-3 border-b-2 border-gray-300 inline-block pb-1"><i class="fas fa-sun text-orange-400 mr-2"></i>ช่วงเช้า</h3>
+                <div class="flex w-full text-white text-center font-medium text-sm min-h-[100px]">
                     <div class="chevron-first bg-[#1e40af] pl-4 pr-6 py-2 w-[15%] relative z-50 flex flex-col items-center justify-center transition hover:scale-105">
                         <i class="fas fa-clipboard-check text-2xl mb-1 text-blue-200"></i>
                         <p class="font-bold leading-tight">08.30-09.00</p>
@@ -126,38 +120,29 @@
                     <div class="chevron bg-[#1e3a8a] pl-8 pr-6 py-2 w-[20%] relative z-40 flex flex-col items-center justify-center transition hover:scale-105">
                         <i class="fas fa-university text-2xl mb-1 text-yellow-200"></i>
                         <p class="font-bold leading-tight">09.00-09.20</p>
-                        <p class="text-[11px] leading-tight mt-1">นโยบายและ<br>ทิศทางมหาวิทยาลัย</p>
+                        <p class="text-[11px] leading-tight mt-1">นโยบายและทิศทางมหาวิทยาลัย</p>
                     </div>
                     <div class="chevron bg-[#172554] pl-8 pr-6 py-2 w-[20%] relative z-30 flex flex-col items-center justify-center transition hover:scale-105">
-                        <i class="fas fa-exclamation-circle text-2xl mb-1 text-red-300"></i>
+                        <i class="fas fa-id-card text-2xl mb-1 text-red-300"></i>
                         <p class="font-bold leading-tight">09.20-09.40</p>
                         <p class="text-[11px] leading-tight mt-1">Pain Points:<br>ปัญหาโครงสร้างปัจจุบัน</p>
                     </div>
                     <div class="chevron bg-[#0f172a] pl-8 pr-6 py-2 w-[20%] relative z-20 flex flex-col items-center justify-center transition hover:scale-105">
-                        <i class="fas fa-star text-2xl mb-1 text-green-300"></i>
+                        <i class="fas fa-heart text-2xl mb-1 text-green-300"></i>
                         <p class="font-bold leading-tight">09.40-10.00</p>
                         <p class="text-[11px] leading-tight mt-1">Existing Strengths:<br>สิ่งที่ดีอยู่แล้ว</p>
                     </div>
                     <div class="chevron bg-[#1e40af] pl-8 pr-6 py-2 w-[25%] relative z-10 flex flex-col items-center justify-center transition hover:scale-105">
-                        <i class="fas fa-lightbulb text-2xl mb-1 text-cyan-300"></i>
+                        <i class="fas fa-star text-2xl mb-1 text-cyan-300"></i>
                         <p class="font-bold leading-tight">10.00-10.45</p>
                         <p class="text-[11px] leading-tight mt-1">Future Vision &<br>"Digital Transformation"</p>
-                    </div>
-                    <div class="chevron-last bg-[#1e3a8a] pl-8 pr-4 py-2 w-[20%] relative z-0 flex flex-col items-center justify-center transition hover:scale-105">
-                        <i class="fas fa-folder-tree text-2xl mb-1 text-orange-200"></i>
-                        <p class="font-bold leading-tight">10.45-12.00</p>
-                        <p class="text-[11px] leading-tight mt-1">Functional Grouping:<br>ประเภทงานนิติการ</p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- ==========================================
-             LAYER 3: รายละเอียดกิจกรรมแยกตามหัวข้อ (Grid 8 คอลัมน์)
-        =========================================== -->
-        <div class="bg-gray-100 px-4 pt-2 pb-6">
-            
-            <!-- ส่วนหัว "ช่วงบ่าย" จัดให้ตรงกับ 3 คอลัมน์ขวา -->
+        <!-- GRID DETAILS LAYER -->
+        <div class="bg-gray-100 px-6 pt-4 pb-8">
             <div class="grid grid-cols-8 gap-1 mb-2">
                 <div class="col-span-5"></div>
                 <div class="col-span-3">
@@ -165,10 +150,8 @@
                 </div>
             </div>
 
-            <!-- Grid เนื้อหาหลัก -->
-            <div class="grid grid-cols-8 gap-1 items-stretch">
-            
-                <!-- Column 1: Policy & Direction -->
+            <div class="grid grid-cols-8 gap-2 items-stretch">
+                <!-- Col 1: Policy -->
                 <div class="flex flex-col bg-white rounded shadow text-center overflow-hidden">
                     <div class="bg-[#1b365d] text-white py-2 font-bold h-[40px] flex items-center justify-center">ช่วงเช้า</div>
                     <div class="bg-[#fde047] text-[#854d0e] py-3 px-2 font-bold h-[60px] flex items-center justify-center leading-tight">Policy &<br>Direction</div>
@@ -183,85 +166,78 @@
                     <div class="bg-[#1b365d] text-white p-2 text-xs h-[80px] flex items-center justify-center">ทุกคนเข้าใจเป้าหมาย<br>และเปิดใจรับความเปลี่ยนแปลง</div>
                 </div>
 
-                <!-- Column 2: Pain Points -->
-            <div class="flex flex-col bg-white rounded shadow text-center overflow-hidden">
-                <div class="bg-gray-100 text-transparent py-2 font-bold h-[40px] flex items-center justify-center">.</div>
-            <div class="bg-[#facc15] text-[#713f12] py-3 px-2 font-bold h-[60px] flex items-center justify-center leading-tight">Pain Points:<br><span class="text-xs font-normal">Current Structure</span></div>
-                <div class="p-3 text-sm flex-grow bg-[#fefce8] text-gray-800 flex flex-col justify-between">
-            <div>
-            <p class="font-bold text-[#a16207] mb-2">Pain Points:<br>ปัญหาโครงสร้างปัจจุบัน (5 งาน)</p>
-            <p class="font-semibold text-[#ca8a04]">Voice of Staff:</p>
-            <p>เขียนปัญหาใส่ Post-it<br>(การ์ดยาว)</p>
-        </div>
-        <!-- เปลี่ยนเป็นไอคอนรูปการ์ด -->
-        <div class="text-[#eab308] text-3xl mt-4"><i class="fas fa-id-card"></i></div>
-    </div>
-    <div class="bg-[#eab308] text-white p-2 text-xs h-[80px] flex items-center justify-center">รายการปัญหาและ<br>ข้อจำกัดของโครงสร้างเดิม</div>
-</div>
-
-<!-- Column 3: Appreciative Inquiry -->
-<div class="flex flex-col bg-white rounded shadow text-center overflow-hidden">
-    <div class="bg-gray-100 text-transparent py-2 font-bold h-[40px] flex items-center justify-center">.</div>
-    <div class="bg-[#4ade80] text-white py-3 px-2 font-bold h-[60px] flex items-center justify-center leading-tight">Appreciative<br>Inquiry</div>
-    <div class="p-3 text-sm flex-grow bg-[#f0fdf4] text-gray-800 flex flex-col justify-between">
-        <div>
-            <p class="font-bold text-[#166534] mb-2">Appreciative Inquiry:</p>
-            <p>เขียนสิ่งที่อยากรักษา<br>ไว้ในโครงสร้างใหม่<br>(หัวใจ)</p>
-        </div>
-        <!-- เปลี่ยนเป็นไอคอนรูปหัวใจ -->
-        <div class="text-green-500 text-3xl mt-4"><i class="fas fa-heart"></i></div>
-    </div>
-    <div class="bg-[#16a34a] text-white p-2 text-xs h-[80px] flex items-center justify-center">รายการจุดแข็งที่<br>ต้องนำไปปรับใช้</div>
-</div>
-
-<!-- Column 4: Future Vision -->
-<div class="flex flex-col bg-white rounded shadow text-center overflow-hidden">
-    <div class="bg-gray-100 text-transparent py-2 font-bold h-[40px] flex items-center justify-center">.</div>
-    <div class="bg-[#f472b6] text-white py-3 px-2 font-bold h-[60px] flex items-center justify-center leading-tight text-[13px]">Future Vision<br><span class="text-[10px] font-normal">& "Digital Transformation"</span></div>
-    <div class="p-3 text-sm flex-grow bg-[#fdf2f8] text-gray-800 flex flex-col justify-between">
-        <div>
-            <p class="font-bold text-[#be185d] mb-2">Dream Big:</p>
-            <p>เขียนสิ่งที่อยากเห็น<br>ในอีก 3 ปีข้างหน้า<br>(ดาว)</p>
-        </div>
-        <!-- เปลี่ยนเป็นไอคอนรูปดาว -->
-        <div class="text-[#db2777] text-3xl mt-4"><i class="fas fa-star"></i></div>
-    </div>
-    <div class="bg-[#db2777] text-white p-2 text-xs h-[80px] flex items-center justify-center">วิสัยทัศน์และเป้าหมาย<br>ในอนาคต</div>
-</div>
-                        <div class="text-[#f472b6] text-3xl mt-4"><i class="fas fa-eye"></i></div>
+                <!-- Col 2: Pain Points (Card Icon) -->
+                <div class="flex flex-col bg-white rounded shadow text-center overflow-hidden">
+                    <div class="bg-gray-100 text-transparent py-2 font-bold h-[40px] flex items-center justify-center">.</div>
+                    <div class="bg-[#facc15] text-[#713f12] py-3 px-2 font-bold h-[60px] flex items-center justify-center leading-tight">Pain Points:<br><span class="text-xs font-normal">Current Structure</span></div>
+                    <div class="p-3 text-sm flex-grow bg-[#fefce8] text-gray-800 flex flex-col justify-between">
+                        <div>
+                            <p class="font-bold text-[#a16207] mb-2">ปัญหาโครงสร้างเดิม (5 งาน)</p>
+                            <p class="font-semibold text-[#ca8a04]">Voice of Staff:</p>
+                            <p>เขียนปัญหาใส่ Post-it<br>(การ์ดยาว)</p>
+                        </div>
+                        <div class="text-[#eab308] text-3xl mt-4"><i class="fas fa-id-card"></i></div>
                     </div>
-                    <div class="bg-[#db2777] text-white p-2 text-xs h-[80px] flex items-center justify-center">ภาพลักษณ์ส่วนนิติการ<br>ที่อยากให้เป็น และทักษะที่จำเป็น</div>
+                    <div class="bg-[#eab308] text-white p-2 text-xs h-[80px] flex items-center justify-center">รายการปัญหาและ<br>ข้อจำกัดของโครงสร้างเดิม</div>
                 </div>
 
-                <!-- Column 5: Functional Grouping -->
+                <!-- Col 3: Appreciative Inquiry (Heart Icon) -->
+                <div class="flex flex-col bg-white rounded shadow text-center overflow-hidden">
+                    <div class="bg-gray-100 text-transparent py-2 font-bold h-[40px] flex items-center justify-center">.</div>
+                    <div class="bg-[#4ade80] text-white py-3 px-2 font-bold h-[60px] flex items-center justify-center leading-tight">Appreciative<br>Inquiry</div>
+                    <div class="p-3 text-sm flex-grow bg-[#f0fdf4] text-gray-800 flex flex-col justify-between">
+                        <div>
+                            <p class="font-bold text-[#166534] mb-2">Appreciative Inquiry:</p>
+                            <p>เขียนสิ่งที่อยากรักษา<br>ไว้ในโครงสร้างใหม่<br>(หัวใจ)</p>
+                        </div>
+                        <div class="text-green-500 text-3xl mt-4"><i class="fas fa-heart"></i></div>
+                    </div>
+                    <div class="bg-[#16a34a] text-white p-2 text-xs h-[80px] flex items-center justify-center">รายการจุดแข็งที่<br>ต้องนำไปปรับใช้</div>
+                </div>
+
+                <!-- Col 4: Future Vision (Star Icon) -->
+                <div class="flex flex-col bg-white rounded shadow text-center overflow-hidden">
+                    <div class="bg-gray-100 text-transparent py-2 font-bold h-[40px] flex items-center justify-center">.</div>
+                    <div class="bg-[#f472b6] text-white py-3 px-2 font-bold h-[60px] flex items-center justify-center leading-tight text-[13px]">Future Vision<br><span class="text-[10px] font-normal">& "Digital Transformation"</span></div>
+                    <div class="p-3 text-sm flex-grow bg-[#fdf2f8] text-gray-800 flex flex-col justify-between">
+                        <div>
+                            <p class="font-bold text-[#be185d] mb-2">Dream Big:</p>
+                            <p>เขียนสิ่งที่อยากเห็น<br>ในอีก 3 ปีข้างหน้า<br>(ดาว)</p>
+                        </div>
+                        <div class="text-[#db2777] text-3xl mt-4"><i class="fas fa-star"></i></div>
+                    </div>
+                    <div class="bg-[#db2777] text-white p-2 text-xs h-[80px] flex items-center justify-center">ภาพลักษณ์ที่อยากให้เป็น<br>และทักษะที่จำเป็น</div>
+                </div>
+
+                <!-- Col 5: Functional Grouping -->
                 <div class="flex flex-col bg-white rounded shadow text-center overflow-hidden border-r-2 border-dashed border-gray-400">
                     <div class="bg-gray-100 text-transparent py-2 font-bold h-[40px] flex items-center justify-center">.</div>
                     <div class="bg-[#64748b] text-white py-3 px-2 font-bold h-[60px] flex items-center justify-center leading-tight">Functional<br>Grouping</div>
                     <div class="p-3 text-sm flex-grow bg-[#f8fafc] text-gray-800 flex flex-col justify-between">
                         <div>
                             <p class="font-bold text-[#334155] mb-2">Categorization:</p>
-                            <p>นำงานทั้งหมด<br>มากรุ๊ปรวมกันเป็น<br>"กลุ่มก้อนภารกิจ"</p>
+                            <p>นำงานทั้งหมดมากรุ๊ป<br>รวมกันเป็นกลุ่มก้อนภารกิจ</p>
                         </div>
                         <div class="text-slate-500 text-3xl mt-4"><i class="fas fa-layer-group"></i></div>
                     </div>
                     <div class="bg-[#475569] text-white p-2 text-xs h-[80px] flex items-center justify-center">กลุ่มงานนิติการที่มี<br>ลักษณะคล้ายกัน</div>
                 </div>
 
-                <!-- Column 6: Drafting New Structure -->
+                <!-- Col 6: Drafting -->
                 <div class="flex flex-col bg-white rounded shadow text-center overflow-hidden">
                     <div class="bg-[#1e3a8a] text-white py-2 font-bold h-[40px] flex items-center justify-center">13.00-14.00</div>
                     <div class="bg-[#1d4ed8] text-white py-3 px-1 font-bold h-[60px] flex items-center justify-center leading-tight">Drafting New<br>Structure</div>
                     <div class="p-3 text-sm flex-grow bg-[#eff6ff] text-gray-800 flex flex-col justify-between">
                         <div>
                             <p class="font-bold text-[#1e40af] mb-2">Structural Design:</p>
-                            <p>ให้แต่ละคน/กลุ่มร่างโครงสร้าง ระบุชื่องานและภาระงานย่อย</p>
+                            <p>ให้แต่ละคนร่างโครงสร้าง ระบุชื่องานและภาระงานย่อย</p>
                         </div>
                         <div class="text-blue-600 text-3xl mt-4"><i class="fas fa-sitemap"></i></div>
                     </div>
                     <div class="bg-[#1e3a8a] text-white p-2 text-xs h-[80px] flex items-center justify-center">แบบร่างโครงสร้างใหม่<br>ที่ตอบโจทย์</div>
                 </div>
 
-                <!-- Column 7: Gallery Walk & Feedback -->
+                <!-- Col 7: Gallery Walk -->
                 <div class="flex flex-col bg-white rounded shadow text-center overflow-hidden">
                     <div class="bg-[#1e3a8a] text-white py-2 font-bold h-[40px] flex items-center justify-center">14.00-15.30</div>
                     <div class="bg-[#1e40af] text-white py-3 px-1 font-bold h-[60px] flex items-center justify-center leading-tight">Gallery Walk<br>& Feedback</div>
@@ -272,67 +248,53 @@
                         </div>
                         <div class="text-indigo-600 text-3xl mt-4"><i class="fas fa-comments"></i></div>
                     </div>
-                    <div class="bg-[#1e3a8a] text-white p-2 text-xs h-[80px] flex items-center justify-center">ข้อมูลเปรียบเทียบข้อดี-<br>ข้อเสียของแต่ละโมเดล</div>
+                    <div class="bg-[#1e3a8a] text-white p-2 text-xs h-[80px] flex items-center justify-center">ข้อมูลเปรียบเทียบ<br>ข้อดี-ข้อเสีย</div>
                 </div>
 
-                <!-- Column 8: Final Selection & Vote -->
+                <!-- Col 8: Final Vote -->
                 <div class="flex flex-col bg-white rounded shadow text-center overflow-hidden">
                     <div class="bg-[#172554] text-white py-2 font-bold h-[40px] flex items-center justify-center">15.30-16.30</div>
                     <div class="bg-[#0f172a] text-white py-3 px-1 font-bold h-[60px] flex items-center justify-center leading-tight">Final Selection<br>& Vote</div>
                     <div class="p-3 text-sm flex-grow bg-[#f8fafc] text-gray-800 flex flex-col justify-between">
                         <div>
                             <p class="font-bold text-[#0f172a] mb-2">Consensus Building:</p>
-                            <p>ลงมติเลือกโครงสร้างที่ "ทำได้จริง" และ "แก้ปัญหาได้ตรงจุด"</p>
+                            <p>ลงมติเลือกโครงสร้างที่ "ทำได้จริง" และ "แก้ปัญหาได้"</p>
                         </div>
                         <div class="text-gray-700 text-3xl mt-4"><i class="fas fa-vote-yea"></i></div>
                     </div>
                     <div class="bg-[#0f172a] text-white p-2 text-xs h-[80px] flex items-center justify-center">ข้อสรุปโครงสร้างใหม่<br>เพื่อเสนออนุมัติ</div>
                 </div>
-
             </div>
         </div>
     </div>
 
-    <!-- Script สำหรับการ Export เป็น PDF และ PNG -->
+    <!-- Script Section -->
     <script>
         async function exportPNG() {
             const btn = document.getElementById('exportPngBtn');
             const originalContent = btn.innerHTML;
             const element = document.getElementById('infographic-container');
             
-            // เปลี่ยนสถานะปุ่มเป็นกำลังโหลด
-            btn.innerHTML = '<i class="fas fa-circle-notch fa-spin text-xl"></i> <span>กำลังสร้าง PNG...</span>';
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin text-xl"></i> <span>กำลังสร้าง...</span>';
             btn.disabled = true;
-            btn.classList.add('opacity-75', 'cursor-not-allowed');
 
             try {
-                // รอภาพโหลดให้เสร็จก่อนสร้าง Canvas
                 const canvas = await html2canvas(element, {
-                    scale: 3, // เพิ่มความละเอียดสูงมาก (High Resolution) เพื่อความคมชัดของ PNG
-                    useCORS: true, // อนุญาตให้ดึงรูปภาพจากโดเมนอื่นมาวาดลง Canvas ได้
-                    backgroundColor: '#ffffff',
-                    logging: false
+                    scale: 3, 
+                    useCORS: true,
+                    backgroundColor: '#ffffff'
                 });
-
-                // แปลงเป็น Data URL (PNG Format)
                 const imgData = canvas.toDataURL('image/png');
-
-                // สร้างลิงก์ดาวน์โหลดและสั่งคลิกอัตโนมัติ
                 const link = document.createElement('a');
-                link.download = 'workshop-schedule.png';
+                link.download = 'legal-workshop-infographic.png';
                 link.href = imgData;
-                document.body.appendChild(link);
                 link.click();
-                document.body.removeChild(link);
-
-            } catch (error) {
-                console.error("Error generating PNG: ", error);
-                alert("เกิดข้อผิดพลาดในการสร้างไฟล์ PNG โปรดลองอีกครั้ง");
+            } catch (err) {
+                console.error(err);
+                alert("Export Failed!");
             } finally {
-                // คืนค่าสถานะปุ่มกลับมาเหมือนเดิม
                 btn.innerHTML = originalContent;
                 btn.disabled = false;
-                btn.classList.remove('opacity-75', 'cursor-not-allowed');
             }
         }
 
@@ -341,49 +303,30 @@
             const originalContent = btn.innerHTML;
             const element = document.getElementById('infographic-container');
             
-            // เปลี่ยนสถานะปุ่มเป็นกำลังโหลด
-            btn.innerHTML = '<i class="fas fa-circle-notch fa-spin text-xl"></i> <span>กำลังสร้าง PDF...</span>';
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin text-xl"></i> <span>กำลังสร้าง...</span>';
             btn.disabled = true;
-            btn.classList.add('opacity-75', 'cursor-not-allowed');
 
             try {
-                // รอภาพโหลดให้เสร็จก่อนสร้าง Canvas
                 const canvas = await html2canvas(element, {
-                    scale: 2.5, // เพิ่มความละเอียด (High Resolution)
-                    useCORS: true, // อนุญาตให้ดึงรูปภาพจากโดเมนอื่นมาวาดลง Canvas ได้
-                    backgroundColor: '#ffffff',
-                    logging: false
+                    scale: 2,
+                    useCORS: true,
+                    backgroundColor: '#ffffff'
                 });
-
-                const imgData = canvas.toDataURL('image/jpeg', 1.0); // ใช้ JPEG quality 1.0 เพื่อความคมชัด
-
-                // เรียกใช้ jsPDF
+                const imgData = canvas.toDataURL('image/jpeg', 1.0);
                 const { jsPDF } = window.jspdf;
-                
-                // กำหนดขนาด PDF แบบ Landscape โดยคำนวณสัดส่วนจากความกว้าง/ความสูงของ Canvas
-                const pdfWidth = canvas.width;
-                const pdfHeight = canvas.height;
-                
                 const pdf = new jsPDF({
-                    orientation: pdfWidth > pdfHeight ? 'landscape' : 'portrait',
+                    orientation: 'landscape',
                     unit: 'px',
-                    format: [pdfWidth, pdfHeight] // สร้าง PDF ขนาดเท่ากับ Infographic พอดี
+                    format: [canvas.width, canvas.height]
                 });
-
-                // นำรูปภาพที่แปลงได้วางลงในหน้า PDF
-                pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight);
-                
-                // สั่งเซฟไฟล์
-                pdf.save("workshop-schedule.pdf");
-
-            } catch (error) {
-                console.error("Error generating PDF: ", error);
-                alert("เกิดข้อผิดพลาดในการสร้างไฟล์ PDF โปรดลองอีกครั้ง");
+                pdf.addImage(imgData, 'JPEG', 0, 0, canvas.width, canvas.height);
+                pdf.save("legal-workshop-infographic.pdf");
+            } catch (err) {
+                console.error(err);
+                alert("Export Failed!");
             } finally {
-                // คืนค่าสถานะปุ่มกลับมาเหมือนเดิม
                 btn.innerHTML = originalContent;
                 btn.disabled = false;
-                btn.classList.remove('opacity-75', 'cursor-not-allowed');
             }
         }
     </script>
